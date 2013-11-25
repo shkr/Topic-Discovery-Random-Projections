@@ -6,8 +6,7 @@ from corpus_module import corpus
 class TopicDiscovery:
 
     ### Function Descriptions : ##############################################
-    ### 1. solve_LinearReg(Y,Theta) - solves linear regression of the form - Y = Beta*Theta, outputs : Beta         ##
-    ### 2. spectral_clusters(weights,clusters) - Does spectral clustering on the given square adjacency matrix to   ##
+    ### 1. spectral_clusters(weights,clusters) - Does spectral clustering on the given square adjacency matrix to   ##
     ### seperate given number of 'clusters'. Outputs list of labels for each node or/row number in the adjancency   ##
     ### matrix                                                                                                      ##
     ##################################################################################################################
@@ -84,7 +83,7 @@ class TopicDiscovery:
                weights[j][i]=np.exp(float(-sigma*( (nodes[i]*nodes[i].T) - (2*nodes[i]*nodes[j].T) + (nodes[j]*nodes[j].T)) ))
                j=j+1            
             #for j in range(0,len(nodes)):
-            #   weights[i].append(np.exp(float(-sigma*( (nodes[i]*nodes[i].T) - (2*nodes[i]*nodes[j].T) + (nodes[j]*nodes[j].T)) )))
+            #  weights[i].append(np.exp(float(-sigma*( (nodes[i]*nodes[i].T) - (2*nodes[i]*nodes[j].T) + (nodes[j]*nodes[j].T)) )))
                 
         labels = self.spectral_clusters(np.matrix(weights,dtype=np.float64),clusters)
         return labels
@@ -102,11 +101,9 @@ class TopicDiscovery:
         set_labels = set(labels)
         for L in set_labels:
             ThetaRow=np.zeros((1,self.M))
-            print "Label : " +str(L)
+            
             for i in range(0,len(self.I)):
                 if L==labels[i]:
-                    print "Novel word vectors"
-                    print self.XBar[self.I[i]]
                     ThetaRow = ThetaRow + np.array(self.XBar[self.I[i]])
             
             Theta.append((ThetaRow[0]/labels.count(L)).tolist())
